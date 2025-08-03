@@ -66,11 +66,14 @@ const toggleMaintenanceStatus = async (droneId: string, currentStatus: string) =
       const newStatus = currentStatus === 'available' ? 'maintenance' : 'available';
       
       // Update the drone status using the service
-      await droneService.updateDrone(droneId, {
-        status: newStatus as Drone['status'],
-        // Update lastMaintenance date if switching to maintenance
-        lastMaintenance: newStatus === 'maintenance' ? new Date() : undefined
-      });
+      const updateData: Partial<Drone> = {
+        status: newStatus as Drone['status']
+      };
+      
+      // Always ensure lastMaintenance is valid
+      updateData.lastMaintenance = newStatus === 'maintenance' ? new Date() : drones.find(d => d.id === droneId)?.lastMaintenance || new Date();
+      
+      await droneService.updateDrone(droneId, updateData);
       
       // Refresh the drones list
       await fetchDrones();
@@ -248,7 +251,16 @@ const addDrone = async () => {
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">Last Maintenance</span>
                   <span className="text-sm text-gray-900">
-                    {format(new Date(drone.lastMaintenance), 'MMM dd, yyyy')}
+                    {(() => {
+                      try {
+                        if (!drone.lastMaintenance) return 'N/A';
+                        const date = new Date(drone.lastMaintenance);
+                        if (isNaN(date.getTime())) return 'N/A';
+                        return format(date, 'MMM dd, yyyy');
+                      } catch {
+                        return 'N/A';
+                      }
+                    })()}
                   </span>
                 </div>
               </div>

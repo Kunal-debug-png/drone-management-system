@@ -18,20 +18,17 @@ drone-survey-system/
 ├── src/
 │   ├── app/                    # Next.js App Router pages
 │   │   ├── dashboard/          # Main dashboard page
-│   │   ├── drones/            # Drone management pages
+│   │   ├── fleet-management/   # Drone fleet management
 │   │   ├── mission-planning/   # Mission planning interface
-│   │   ├── missions/          # Mission management pages
-│   │   ├── reports/           # Analytics and reports
-│   │   └── api/               # API routes
+│   │   ├── monitoring/         # Mission monitoring
+│   │   └── real-time-monitoring/ # Real-time flight tracking
 │   ├── components/            # Reusable React components
-│   │   ├── Dashboard.tsx      # Main dashboard component
+│   │   ├── FleetManager.tsx   # Drone fleet management
 │   │   ├── MissionPlanner.tsx # Interactive mission planning
-│   │   ├── DroneCard.tsx      # Drone status display
+│   │   ├── RealTimeMonitor.tsx# Real-time flight monitoring
 │   │   └── MapEventHandler.tsx# Map interaction handler
 │   ├── services/              # Business logic and data services
-│   │   └── mockFirebase.ts    # Mock data service (simulates backend)
-│   ├── data/                  # Static data and configurations
-│   │   └── dummyData.json     # Sample data for development
+│   │   └── mockFirebase.ts    # localStorage service layer
 │   ├── types/                 # TypeScript type definitions
 │   │   └── index.ts           # Main type definitions
 │   └── styles/                # Global styles and Tailwind config
@@ -57,9 +54,9 @@ drone-survey-system/
 - **OpenStreetMap**: Map tile provider (no API key required)
 
 ### Data & State Management
-- **Local Storage**: Client-side data persistence
-- **Mock Firebase Service**: Simulated backend with CRUD operations
-- **UUID**: Unique identifier generation
+- **Browser localStorage**: Complete client-side data persistence
+- **Mock Firebase Service**: localStorage-based service layer with CRUD operations
+- **No External Database**: All data stored locally in browser
 
 ### Development Tools
 - **ESLint**: Code linting and quality
@@ -117,11 +114,12 @@ npm start
 - **Leaflet Markers**: CDN-hosted marker icons
 - **Icons**: Lucide React icon library (self-contained)
 
-### No External API Keys Required
-This project is designed to work without any external API keys or paid services:
-- Maps use free OpenStreetMap tiles
-- All data is stored locally using browser LocalStorage
-- Mock backend service simulates real database operations
+### No External Dependencies Required
+This project is designed to work completely offline after initial load:
+- Maps use free OpenStreetMap tiles (cached by browser)
+- All data is stored locally using browser localStorage
+- No backend server or database required
+- No API keys or external services needed
 
 ## 🎯 Application Flow
 
@@ -177,28 +175,30 @@ This project is designed to work without any external API keys or paid services:
 
 ## 📊 Data Management
 
-### Local Storage Schema
+### localStorage Schema
 ```javascript
 // Storage Keys
 STORAGE_KEYS = {
   DRONES: 'drone_survey_drones',
-  MISSIONS: 'drone_survey_missions', 
-  REPORTS: 'drone_survey_reports'
+  MISSIONS: 'drone_survey_missions'
 }
 ```
 
-### Data Persistence
-- **Client-side**: Browser LocalStorage for data persistence
-- **Sync**: Automatic JSON file updates via API routes
-- **Backup**: Data export functionality available
-- **Reset**: Restore to default sample data option
+### Data Persistence Strategy
+- **Pure localStorage**: All data stored in browser localStorage
+- **No External Database**: No backend server or database required
+- **Session Persistence**: Data survives browser refreshes and sessions
+- **Export Functionality**: Built-in data export for backup
+- **Fresh Start**: System begins with empty arrays, users add their own data
 
-### Mock Backend Service
-The `mockFirebase.ts` service simulates a real backend with:
-- CRUD operations for drones, missions, and reports
-- Real-time data subscriptions
-- Data validation and error handling
-- Automatic ID generation and timestamps
+### localStorage Service Layer
+The `mockFirebase.ts` service provides:
+- Complete CRUD operations for drones and missions
+- Automatic localStorage synchronization
+- Date object serialization/deserialization
+- Error handling and data validation
+- Unique ID generation with timestamps
+- No external dependencies or API calls
 
 ## 🔧 Configuration
 
@@ -209,7 +209,7 @@ No environment variables required for basic operation. All external dependencies
 - **Map Center**: Default coordinates in `MissionPlanner.tsx`
 - **Flight Parameters**: Min/max values in form inputs
 - **Sensor Types**: Available sensors array in components
-- **Sample Data**: Modify `dummyData.json` for different demo data
+- **Initial Data**: System starts empty - users create their own drones and missions
 
 ## 🐛 Troubleshooting
 
@@ -231,9 +231,10 @@ No environment variables required for basic operation. All external dependencies
    - **Check**: Console logs for debugging information
 
 4. **Data Not Persisting**
-   - **Storage**: Verify browser LocalStorage is enabled
-   - **Space**: Check available storage space
-   - **Privacy**: Ensure not in incognito/private mode
+   - **localStorage**: Verify browser localStorage is enabled
+   - **Storage Space**: Check available browser storage space
+   - **Privacy Mode**: localStorage doesn't persist in incognito/private mode
+   - **Browser Support**: Ensure browser supports localStorage API
 
 ### Development Issues
 
