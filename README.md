@@ -259,7 +259,7 @@ npm run build
 - Static export possible with `next export` (limited features)
 - Ensure Node.js 18+ support
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **OpenStreetMap**: Free map data and tiles
 - **Leaflet**: Excellent mapping library
