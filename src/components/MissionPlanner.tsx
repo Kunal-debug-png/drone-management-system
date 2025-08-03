@@ -21,7 +21,7 @@ export default function MissionPlanner() {
   const [drones, setDrones] = useState<Drone[]>([]);
   const [selectedDrone, setSelectedDrone] = useState<string>('');
   const [missionName, setMissionName] = useState('');
-  const [flightPattern, setFlightPattern] = useState<'crosshatch' | 'perimeter' | 'custom'>('crosshatch');
+  const [flightPattern, setFlightPattern] = useState<'crosshatch' | 'perimeter'>('crosshatch');
   const altitude = 100;
   const speed = 10;
   const overlapPercentage = 20;
@@ -130,48 +130,39 @@ export default function MissionPlanner() {
     let finalWaypoints = waypoints;
     if (waypoints.length === 0) {
       alert('No waypoints generated. Auto-generating waypoints for the mission.');
-      if (flightPattern === 'custom') {
-        // For custom pattern, create perimeter waypoints as fallback
-        finalWaypoints = surveyArea.map(point => ({
+      // Use the existing generate function logic
+      let generatedWaypoints: Waypoint[] = [];
+      
+      if (flightPattern === 'perimeter') {
+        generatedWaypoints = surveyArea.map(point => ({
           ...point,
           altitude,
           action: 'capture' as const
         }));
-      } else {
-        // Use the existing generate function logic
-        let generatedWaypoints: Waypoint[] = [];
+      } else if (flightPattern === 'crosshatch') {
+        const bounds = {
+          minLat: Math.min(...surveyArea.map(p => p.lat)),
+          maxLat: Math.max(...surveyArea.map(p => p.lat)),
+          minLng: Math.min(...surveyArea.map(p => p.lng)),
+          maxLng: Math.max(...surveyArea.map(p => p.lng))
+        };
         
-        if (flightPattern === 'perimeter') {
-          generatedWaypoints = surveyArea.map(point => ({
-            ...point,
-            altitude,
-            action: 'capture' as const
-          }));
-        } else if (flightPattern === 'crosshatch') {
-          const bounds = {
-            minLat: Math.min(...surveyArea.map(p => p.lat)),
-            maxLat: Math.max(...surveyArea.map(p => p.lat)),
-            minLng: Math.min(...surveyArea.map(p => p.lng)),
-            maxLng: Math.max(...surveyArea.map(p => p.lng))
-          };
-          
-          const stepLat = (bounds.maxLat - bounds.minLat) / 3;
-          const stepLng = (bounds.maxLng - bounds.minLng) / 3;
-          
-          // Generate a simple grid pattern
-          for (let i = 0; i <= 3; i++) {
-            for (let j = 0; j <= 3; j++) {
-              generatedWaypoints.push({
-                lat: bounds.minLat + i * stepLat,
-                lng: bounds.minLng + j * stepLng,
-                altitude,
-                action: 'capture'
-              });
-            }
+        const stepLat = (bounds.maxLat - bounds.minLat) / 3;
+        const stepLng = (bounds.maxLng - bounds.minLng) / 3;
+        
+        // Generate a simple grid pattern
+        for (let i = 0; i <= 3; i++) {
+          for (let j = 0; j <= 3; j++) {
+            generatedWaypoints.push({
+              lat: bounds.minLat + i * stepLat,
+              lng: bounds.minLng + j * stepLng,
+              altitude,
+              action: 'capture'
+            });
           }
         }
-        finalWaypoints = generatedWaypoints;
       }
+      finalWaypoints = generatedWaypoints;
       setWaypoints(finalWaypoints);
     }
 
@@ -279,14 +270,14 @@ export default function MissionPlanner() {
                 Flight Pattern
               </label>
               <div className="flex space-x-4">
-                {(['crosshatch', 'perimeter', 'custom'] as const).map(pattern => (
+                {(['crosshatch', 'perimeter'] as const).map(pattern => (
                   <label key={pattern} className="flex items-center">
                     <input
                       type="radio"
                       name="pattern"
                       value={pattern}
                       checked={flightPattern === pattern}
-                      onChange={(e) => setFlightPattern(e.target.value as 'crosshatch' | 'perimeter' | 'custom')}
+                      onChange={(e) => setFlightPattern(e.target.value as 'crosshatch' | 'perimeter')}
                       className="mr-2"
                     />
                     <span className="capitalize">{pattern}</span>
