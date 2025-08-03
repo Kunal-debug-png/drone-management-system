@@ -89,25 +89,6 @@ function processMissions(missions: RawMission[]): Mission[] {
   }));
 }
 
-// API endpoint to update JSON file
-async function syncJsonFile() {
-  try {
-    const response = await fetch('/api/data', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        drones: runtimeDrones,
-        missions: runtimeMissions,
-      })
-    });
-
-    if (!response.ok) {
-      console.error('Failed to sync JSON file');
-    }
-  } catch (error) {
-    console.error('Error syncing JSON file:', error);
-  }
-}
 
 // Local storage helpers
 function loadFromStorage<T>(key: string, defaultValue: T): T {
@@ -174,7 +155,6 @@ export const droneService = {
     };
     runtimeDrones.push(newDrone);
     saveToStorage(STORAGE_KEYS.DRONES, runtimeDrones);
-    await syncJsonFile();
     return Promise.resolve(newId);
   },
 
@@ -183,7 +163,6 @@ export const droneService = {
     if (index !== -1) {
       runtimeDrones[index] = { ...runtimeDrones[index], ...updates };
       saveToStorage(STORAGE_KEYS.DRONES, runtimeDrones);
-      await syncJsonFile();
     }
     return Promise.resolve();
   },
@@ -191,7 +170,6 @@ export const droneService = {
   async deleteDrone(id: string): Promise<void> {
     runtimeDrones = runtimeDrones.filter(d => d.id !== id);
     saveToStorage(STORAGE_KEYS.DRONES, runtimeDrones);
-    await syncJsonFile();
     return Promise.resolve();
   },
 
@@ -223,7 +201,6 @@ export const missionService = {
     };
     runtimeMissions.push(newMission);
     saveToStorage(STORAGE_KEYS.MISSIONS, runtimeMissions);
-    await syncJsonFile();
     return Promise.resolve(newId);
   },
 
@@ -236,7 +213,6 @@ export const missionService = {
         updatedAt: new Date()
       };
       saveToStorage(STORAGE_KEYS.MISSIONS, runtimeMissions);
-      await syncJsonFile();
     }
     return Promise.resolve();
   },
@@ -299,7 +275,6 @@ export const dataService = {
     saveToStorage(STORAGE_KEYS.DRONES, runtimeDrones);
     saveToStorage(STORAGE_KEYS.MISSIONS, runtimeMissions);
     
-    await syncJsonFile();
   },
 
   // Clear all localStorage data
@@ -312,7 +287,6 @@ export const dataService = {
     runtimeDrones = processDrones(dummyData.drones as RawDrone[]);
     runtimeMissions = processMissions(dummyData.missions as RawMission[]);
     
-    await syncJsonFile();
   },
 
   // Export current data as JSON
