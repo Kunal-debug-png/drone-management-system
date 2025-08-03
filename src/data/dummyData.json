@@ -1,0 +1,884 @@
+{
+  "drones": [
+    {
+      "id": "drone1",
+      "name": "Drone Alpha",
+      "model": "Alpha-123",
+      "status": "in-mission",
+      "batteryLevel": 85,
+      "location": {
+        "lat": 40.712776,
+        "lng": -74.005974
+      },
+      "gpsSignal": 98,
+      "temperature": 22,
+      "lastMaintenance": "2025-07-01T00:00:00.000Z",
+      "specifications": {
+        "maxAltitude": 120,
+        "maxSpeed": 15,
+        "maxFlightTime": 30,
+        "sensors": [
+          "RGB Camera",
+          "Infrared"
+        ]
+      },
+      "currentMissionId": "mission1"
+    },
+    {
+      "id": "drone2",
+      "name": "Drone Bravo",
+      "model": "Bravo-456",
+      "status": "in-mission",
+      "batteryLevel": 60,
+      "location": {
+        "lat": 34.052235,
+        "lng": -118.243683
+      },
+      "gpsSignal": 95,
+      "temperature": 25,
+      "lastMaintenance": "2025-06-20T00:00:00.000Z",
+      "specifications": {
+        "maxAltitude": 100,
+        "maxSpeed": 12,
+        "maxFlightTime": 25,
+        "sensors": [
+          "Thermal Camera",
+          "LiDAR"
+        ]
+      },
+      "currentMissionId": "mission1754148150240"
+    },
+    {
+      "id": "drone3",
+      "name": "Drone Charlie",
+      "model": "Charlie-789",
+      "status": "in-mission",
+      "batteryLevel": 92,
+      "location": {
+        "lat": 41.8781,
+        "lng": -87.6298
+      },
+      "gpsSignal": 97,
+      "temperature": 20,
+      "lastMaintenance": "2025-07-15T00:00:00.000Z",
+      "specifications": {
+        "maxAltitude": 150,
+        "maxSpeed": 18,
+        "maxFlightTime": 35,
+        "sensors": [
+          "RGB Camera",
+          "Multispectral",
+          "Infrared"
+        ]
+      },
+      "currentMissionId": "mission1754216352930"
+    },
+    {
+      "id": "drone4",
+      "name": "Drone Delta",
+      "model": "Delta-101",
+      "status": "maintenance",
+      "batteryLevel": 0,
+      "location": {
+        "lat": 29.7604,
+        "lng": -95.3698
+      },
+      "gpsSignal": 0,
+      "temperature": 24,
+      "lastMaintenance": "2025-07-20T00:00:00.000Z",
+      "specifications": {
+        "maxAltitude": 200,
+        "maxSpeed": 20,
+        "maxFlightTime": 40,
+        "sensors": [
+          "LiDAR",
+          "Thermal Camera"
+        ]
+      }
+    },
+    {
+      "id": "drone5",
+      "name": "Drone Echo",
+      "model": "Echo-202",
+      "status": "in-mission",
+      "batteryLevel": 45,
+      "location": {
+        "lat": 37.7749,
+        "lng": -122.4194
+      },
+      "gpsSignal": 92,
+      "temperature": 18,
+      "lastMaintenance": "2025-07-10T00:00:00.000Z",
+      "currentMissionId": "mission2",
+      "specifications": {
+        "maxAltitude": 180,
+        "maxSpeed": 16,
+        "maxFlightTime": 32,
+        "sensors": [
+          "RGB Camera",
+          "LiDAR",
+          "Infrared"
+        ]
+      }
+    },
+    {
+      "id": "drone6",
+      "name": "Drone Foxtrot",
+      "model": "Foxtrot-303",
+      "status": "idle",
+      "batteryLevel": 75,
+      "location": {
+        "lat": 25.7617,
+        "lng": -80.1918
+      },
+      "gpsSignal": 88,
+      "temperature": 28,
+      "lastMaintenance": "2025-06-30T00:00:00.000Z",
+      "specifications": {
+        "maxAltitude": 140,
+        "maxSpeed": 14,
+        "maxFlightTime": 28,
+        "sensors": [
+          "Multispectral",
+          "Thermal Camera"
+        ]
+      }
+    },
+    {
+      "name": "Vistro",
+      "model": "Vg2",
+      "maxAltitude": 400,
+      "maxSpeed": 20,
+      "maxFlightTime": 30,
+      "sensors": [
+        "RGB Camera"
+      ],
+      "status": "in-mission",
+      "batteryLevel": 100,
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.006
+      },
+      "gpsSignal": 95,
+      "temperature": 25,
+      "lastMaintenance": "2025-08-02T10:55:09.878Z",
+      "specifications": {
+        "maxAltitude": 400,
+        "maxSpeed": 20,
+        "maxFlightTime": 30,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "id": "drone1754132109878",
+      "currentMissionId": "mission1754134343701"
+    },
+    {
+      "name": "Vistra",
+      "model": "2",
+      "maxAltitude": 400,
+      "maxSpeed": 20,
+      "maxFlightTime": 30,
+      "sensors": [
+        "RGB Camera"
+      ],
+      "status": "in-mission",
+      "batteryLevel": 100,
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.006
+      },
+      "gpsSignal": 95,
+      "temperature": 25,
+      "lastMaintenance": "2025-08-02T10:55:22.324Z",
+      "specifications": {
+        "maxAltitude": 400,
+        "maxSpeed": 20,
+        "maxFlightTime": 30,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "id": "drone1754132122324",
+      "currentMissionId": "mission1754133642416"
+    },
+    {
+      "name": "vdcv",
+      "model": "efedf",
+      "maxAltitude": 400,
+      "maxSpeed": 20,
+      "maxFlightTime": 30,
+      "sensors": [
+        "RGB Camera"
+      ],
+      "status": "available",
+      "batteryLevel": 100,
+      "location": {
+        "lat": 40.7128,
+        "lng": -74.006
+      },
+      "gpsSignal": 95,
+      "temperature": 25,
+      "lastMaintenance": "2025-08-03T10:41:40.225Z",
+      "specifications": {
+        "maxAltitude": 400,
+        "maxSpeed": 20,
+        "maxFlightTime": 30,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "id": "drone1754217700440"
+    }
+  ],
+  "missions": [
+    {
+      "id": "mission1",
+      "name": "Survey Area Alpha",
+      "droneId": "drone1",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.7128,
+          "lng": -74.006
+        },
+        "bounds": [
+          {
+            "lat": 40.712,
+            "lng": -74.006
+          },
+          {
+            "lat": 40.713,
+            "lng": -74.005
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 40.712,
+            "lng": -74.006,
+            "altitude": 100
+          },
+          {
+            "lat": 40.713,
+            "lng": -74.005,
+            "altitude": 100
+          }
+        ],
+        "pattern": "crosshatch"
+      },
+      "parameters": {
+        "altitude": 100,
+        "speed": 10,
+        "overlapPercentage": 30,
+        "dataCollectionFrequency": 1,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 10
+      },
+      "createdAt": "2025-07-31T00:00:00.000Z",
+      "updatedAt": "2025-07-31T00:00:00.000Z"
+    },
+    {
+      "id": "mission2",
+      "name": "Industrial Site Survey",
+      "droneId": "drone5",
+      "status": "in-progress",
+      "surveyArea": {
+        "center": {
+          "lat": 37.7749,
+          "lng": -122.4194
+        },
+        "bounds": [
+          {
+            "lat": 37.774,
+            "lng": -122.42
+          },
+          {
+            "lat": 37.775,
+            "lng": -122.419
+          },
+          {
+            "lat": 37.776,
+            "lng": -122.418
+          },
+          {
+            "lat": 37.774,
+            "lng": -122.418
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 37.774,
+            "lng": -122.42,
+            "altitude": 120
+          },
+          {
+            "lat": 37.775,
+            "lng": -122.42,
+            "altitude": 120
+          },
+          {
+            "lat": 37.775,
+            "lng": -122.419,
+            "altitude": 120
+          },
+          {
+            "lat": 37.774,
+            "lng": -122.419,
+            "altitude": 120
+          },
+          {
+            "lat": 37.774,
+            "lng": -122.418,
+            "altitude": 120
+          }
+        ],
+        "pattern": "perimeter"
+      },
+      "parameters": {
+        "altitude": 120,
+        "speed": 12,
+        "overlapPercentage": 25,
+        "dataCollectionFrequency": 2,
+        "sensors": [
+          "RGB Camera",
+          "LiDAR"
+        ]
+      },
+      "progress": {
+        "percentage": 65,
+        "currentWaypoint": 3,
+        "estimatedTimeRemaining": 8
+      },
+      "startTime": "2025-08-02T08:30:00.000Z",
+      "createdAt": "2025-08-02T08:00:00.000Z",
+      "updatedAt": "2025-08-02T10:15:00.000Z"
+    },
+    {
+      "name": "Surveliance over jersey city",
+      "droneId": "drone1",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.71471468373896,
+          "lng": -74.01804256805919
+        },
+        "bounds": [
+          {
+            "lat": 40.71471156535915,
+            "lng": -74.0180511516519
+          },
+          {
+            "lat": 40.71471156535915,
+            "lng": -74.0180511516519
+          },
+          {
+            "lat": 40.71471156535915,
+            "lng": -74.0180511516519
+          },
+          {
+            "lat": 40.71472403887838,
+            "lng": -74.01801681728102
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 40.71471156535915,
+            "lng": -74.0180511516519,
+            "altitude": 103,
+            "action": "capture"
+          },
+          {
+            "lat": 40.71471156535915,
+            "lng": -74.0180511516519,
+            "altitude": 103,
+            "action": "capture"
+          },
+          {
+            "lat": 40.71471156535915,
+            "lng": -74.0180511516519,
+            "altitude": 103,
+            "action": "capture"
+          },
+          {
+            "lat": 40.71472403887838,
+            "lng": -74.01801681728102,
+            "altitude": 103,
+            "action": "capture"
+          }
+        ],
+        "pattern": "custom"
+      },
+      "parameters": {
+        "altitude": 103,
+        "speed": 13,
+        "overlapPercentage": 20,
+        "dataCollectionFrequency": 2,
+        "sensors": [
+          "RGB Camera",
+          "Thermal Camera",
+          "LiDAR",
+          "Infrared",
+          "Multispectral"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 19
+      },
+      "createdAt": "2025-08-02T10:49:10.617Z",
+      "updatedAt": "2025-08-02T10:49:10.617Z",
+      "id": "mission1754131750617"
+    },
+    {
+      "name": "Shagun",
+      "droneId": "drone1754132109878",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.7143860509605,
+          "lng": -74.0038032573648
+        },
+        "bounds": [
+          {
+            "lat": 40.71223798240991,
+            "lng": -74.00740814628081
+          },
+          {
+            "lat": 40.718226498833154,
+            "lng": -74.00397491874175
+          },
+          {
+            "lat": 40.71197759991156,
+            "lng": -74.00345993461089
+          },
+          {
+            "lat": 40.71510212268736,
+            "lng": -74.00037002982573
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 40.71223798240991,
+            "lng": -74.00740814628081,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.718226498833154,
+            "lng": -74.00397491874175,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.71197759991156,
+            "lng": -74.00345993461089,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.71510212268736,
+            "lng": -74.00037002982573,
+            "altitude": 100,
+            "action": "capture"
+          }
+        ],
+        "pattern": "custom"
+      },
+      "parameters": {
+        "altitude": 100,
+        "speed": 10,
+        "overlapPercentage": 20,
+        "dataCollectionFrequency": 1,
+        "sensors": [
+          "RGB Camera",
+          "Thermal Camera",
+          "Multispectral",
+          "LiDAR",
+          "Infrared"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 24
+      },
+      "createdAt": "2025-08-02T11:00:18.831Z",
+      "updatedAt": "2025-08-02T11:00:18.831Z",
+      "id": "mission1754132418831"
+    },
+    {
+      "name": "Destroy Kashish face",
+      "droneId": "drone1754132122324",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.99391454943168,
+          "lng": -74.16135409846903
+        },
+        "bounds": [
+          {
+            "lat": 41.00661935925328,
+            "lng": -74.18573001399638
+          },
+          {
+            "lat": 41.003508557618105,
+            "lng": -74.12530520930888
+          },
+          {
+            "lat": 40.971355009204025,
+            "lng": -74.13629153743388
+          },
+          {
+            "lat": 40.994175271651315,
+            "lng": -74.198089633137
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 41.00661935925328,
+            "lng": -74.18573001399638,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 41.003508557618105,
+            "lng": -74.12530520930888,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.971355009204025,
+            "lng": -74.13629153743388,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.994175271651315,
+            "lng": -74.198089633137,
+            "altitude": 100,
+            "action": "capture"
+          }
+        ],
+        "pattern": "custom"
+      },
+      "parameters": {
+        "altitude": 100,
+        "speed": 10,
+        "overlapPercentage": 20,
+        "dataCollectionFrequency": 1,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 24
+      },
+      "createdAt": "2025-08-02T11:20:42.416Z",
+      "updatedAt": "2025-08-02T11:20:42.416Z",
+      "id": "mission1754133642416"
+    },
+    {
+      "name": "Destroy tammana future",
+      "droneId": "drone1754132109878",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.84488700357676,
+          "lng": -74.04186916770415
+        },
+        "bounds": [
+          {
+            "lat": 40.84076166649506,
+            "lng": -74.04980850638823
+          },
+          {
+            "lat": 40.85076624245132,
+            "lng": -74.0429420513101
+          },
+          {
+            "lat": 40.84556924864267,
+            "lng": -74.0374488872476
+          },
+          {
+            "lat": 40.842450856717974,
+            "lng": -74.03727722587065
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 40.84076166649506,
+            "lng": -74.04980850638823,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.85076624245132,
+            "lng": -74.0429420513101,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.84556924864267,
+            "lng": -74.0374488872476,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.842450856717974,
+            "lng": -74.03727722587065,
+            "altitude": 100,
+            "action": "capture"
+          }
+        ],
+        "pattern": "custom"
+      },
+      "parameters": {
+        "altitude": 100,
+        "speed": 10,
+        "overlapPercentage": 20,
+        "dataCollectionFrequency": 1,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 24
+      },
+      "createdAt": "2025-08-02T11:32:23.701Z",
+      "updatedAt": "2025-08-02T11:32:23.701Z",
+      "id": "mission1754134343701"
+    },
+    {
+      "name": "Destroy kashish future",
+      "droneId": "drone2",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.745384951807075,
+          "lng": -73.96329117240386
+        },
+        "bounds": [
+          {
+            "lat": 40.7465995334752,
+            "lng": -73.96002960624175
+          },
+          {
+            "lat": 40.748681481431696,
+            "lng": -73.96929932059722
+          },
+          {
+            "lat": 40.74087384051435,
+            "lng": -73.9605445903726
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 40.7465995334752,
+            "lng": -73.96002960624175,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.748681481431696,
+            "lng": -73.96929932059722,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.74087384051435,
+            "lng": -73.9605445903726,
+            "altitude": 100,
+            "action": "capture"
+          }
+        ],
+        "pattern": "custom"
+      },
+      "parameters": {
+        "altitude": 100,
+        "speed": 10,
+        "overlapPercentage": 20,
+        "dataCollectionFrequency": 1,
+        "sensors": [
+          "RGB Camera"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 18
+      },
+      "createdAt": "2025-08-02T15:22:30.240Z",
+      "updatedAt": "2025-08-02T15:22:30.240Z",
+      "id": "mission1754148150240"
+    },
+    {
+      "name": "f",
+      "droneId": "drone3",
+      "status": "planned",
+      "surveyArea": {
+        "center": {
+          "lat": 40.69855524653035,
+          "lng": -73.93846894148739
+        },
+        "bounds": [
+          {
+            "lat": 40.714440894586765,
+            "lng": -73.9779510581866
+          },
+          {
+            "lat": 40.68813799037857,
+            "lng": -73.88319397810848
+          },
+          {
+            "lat": 40.693086854625705,
+            "lng": -73.95426178816706
+          }
+        ]
+      },
+      "flightPath": {
+        "waypoints": [
+          {
+            "lat": 40.68813799037857,
+            "lng": -73.9779510581866,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.68813799037857,
+            "lng": -73.94636536482723,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.68813799037857,
+            "lng": -73.91477967146785,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.68813799037857,
+            "lng": -73.88319397810848,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.69690562511464,
+            "lng": -73.9779510581866,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.69690562511464,
+            "lng": -73.94636536482723,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.69690562511464,
+            "lng": -73.91477967146785,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.69690562511464,
+            "lng": -73.88319397810848,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.7056732598507,
+            "lng": -73.9779510581866,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.7056732598507,
+            "lng": -73.94636536482723,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.7056732598507,
+            "lng": -73.91477967146785,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.7056732598507,
+            "lng": -73.88319397810848,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.714440894586765,
+            "lng": -73.9779510581866,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.714440894586765,
+            "lng": -73.94636536482723,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.714440894586765,
+            "lng": -73.91477967146785,
+            "altitude": 100,
+            "action": "capture"
+          },
+          {
+            "lat": 40.714440894586765,
+            "lng": -73.88319397810848,
+            "altitude": 100,
+            "action": "capture"
+          }
+        ],
+        "pattern": "crosshatch"
+      },
+      "parameters": {
+        "altitude": 100,
+        "speed": 10,
+        "overlapPercentage": 20,
+        "dataCollectionFrequency": 1,
+        "sensors": [
+          "RGB Camera",
+          "Infrared"
+        ]
+      },
+      "progress": {
+        "percentage": 0,
+        "currentWaypoint": 0,
+        "estimatedTimeRemaining": 96
+      },
+      "createdAt": "2025-08-03T10:19:12.930Z",
+      "updatedAt": "2025-08-03T10:19:12.930Z",
+      "id": "mission1754216352930"
+    }
+  ]
+}
