@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Polyline, Polygon, Popup } from 'react-leaflet';
 import { Icon, LatLngExpression } from 'leaflet';
 import { Mission, Drone } from '@/types';
+import { droneService, missionService } from '@/services/mockFirebase';
 
 // Fix default icons for react-leaflet
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -18,18 +19,18 @@ export default function RealTimeMonitor() {
   const [missions, setMissions] = useState<Mission[]>([]);
   const [drones, setDrones] = useState<Drone[]>([]);
 
-  useEffect(() => {
+useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/data');
-        const data = await response.json();
+        const drones = await droneService.getAllDrones();
+        const missions = await missionService.getAllMissions();
         
         // Show all missions (including planned ones) for better visibility
-        const activeMissions = data.missions.filter((mission: Mission) => 
+        const activeMissions = missions.filter((mission: Mission) => 
           ['planned', 'starting', 'in-progress', 'paused'].includes(mission.status)
         );
         setMissions(activeMissions);
-        setDrones(data.drones || []);
+        setDrones(drones);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       }

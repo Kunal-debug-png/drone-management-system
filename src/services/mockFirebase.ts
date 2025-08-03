@@ -1,93 +1,10 @@
 import { Drone, Mission, OrganizationStats } from '@/types';
-import dummyData from '@/data/dummyData.json';
 
 // Local storage keys
 const STORAGE_KEYS = {
   DRONES: 'drone_survey_drones',
   MISSIONS: 'drone_survey_missions',
 };
-
-// Interfaces for raw JSON data
-interface RawDrone {
-  id: string;
-  name: string;
-  model: string;
-  status: string;
-  batteryLevel: number;
-  location: { lat: number; lng: number };
-  gpsSignal: number;
-  temperature: number;
-  lastMaintenance: string; // Date as string in JSON
-  currentMissionId?: string;
-  specifications: {
-    maxAltitude: number;
-    maxSpeed: number;
-    maxFlightTime: number;
-    sensors: string[];
-  };
-}
-
-interface RawMission {
-  id: string;
-  name: string;
-  droneId: string;
-  status: string;
-  surveyArea: {
-    center: { lat: number; lng: number };
-    bounds: { lat: number; lng: number }[];
-  };
-  flightPath: {
-    waypoints: { lat: number; lng: number; altitude: number; action?: string }[];
-    pattern: string;
-  };
-  parameters: {
-    altitude: number;
-    speed: number;
-    overlapPercentage: number;
-    dataCollectionFrequency: number;
-    sensors: string[];
-  };
-  progress: {
-    percentage: number;
-    currentWaypoint: number;
-    estimatedTimeRemaining: number;
-  };
-  startTime?: string; // Date as string in JSON
-  endTime?: string; // Date as string in JSON
-  createdAt: string; // Date as string in JSON
-  updatedAt: string; // Date as string in JSON
-}
-
-// Convert date strings to Date objects for dummy data
-function processDrones(drones: RawDrone[]): Drone[] {
-  if (!Array.isArray(drones) || drones.length === 0) {
-    return [];
-  }
-  return drones.map(drone => ({
-    ...drone,
-    lastMaintenance: new Date(drone.lastMaintenance),
-    currentMissionId: drone.currentMissionId || undefined,
-    status: drone.status as Drone['status']
-  }));
-}
-
-function processMissions(missions: RawMission[]): Mission[] {
-  if (!Array.isArray(missions) || missions.length === 0) {
-    return [];
-  }
-  return missions.map(mission => ({
-    ...mission,
-    createdAt: new Date(mission.createdAt),
-    updatedAt: new Date(mission.updatedAt),
-    startTime: mission.startTime ? new Date(mission.startTime) : undefined,
-    endTime: mission.endTime ? new Date(mission.endTime) : undefined,
-    status: mission.status as Mission['status'],
-    flightPath: {
-      ...mission.flightPath,
-      pattern: mission.flightPath.pattern as Mission['flightPath']['pattern']
-    }
-  }));
-}
 
 
 // Local storage helpers
@@ -132,9 +49,9 @@ function saveToStorage<T>(key: string, data: T): void {
   }
 }
 
-// Initialize data (load from storage or use dummy data)
-let runtimeDrones = loadFromStorage(STORAGE_KEYS.DRONES, processDrones(dummyData.drones as RawDrone[]));
-let runtimeMissions = loadFromStorage(STORAGE_KEYS.MISSIONS, processMissions(dummyData.missions as RawMission[]));
+// Initialize data (load from storage or start with empty arrays)
+let runtimeDrones = loadFromStorage(STORAGE_KEYS.DRONES, [] as Drone[]);
+let runtimeMissions = loadFromStorage(STORAGE_KEYS.MISSIONS, [] as Mission[]);
 
 // Drone Services
 export const droneService = {
@@ -267,26 +184,15 @@ export const organizationService = {
 
 // Utility functions
 export const dataService = {
-  // Reset all data to original dummy data
-  async resetToDefaults(): Promise<void> {
-    runtimeDrones = processDrones(dummyData.drones as RawDrone[]);
-    runtimeMissions = processMissions(dummyData.missions as RawMission[]);
-    
-    saveToStorage(STORAGE_KEYS.DRONES, runtimeDrones);
-    saveToStorage(STORAGE_KEYS.MISSIONS, runtimeMissions);
-    
-  },
-
   // Clear all localStorage data
   async clearAllData(): Promise<void> {
     if (typeof window !== 'undefined') {
       localStorage.removeItem(STORAGE_KEYS.DRONES);
       localStorage.removeItem(STORAGE_KEYS.MISSIONS);
     }
-    // Reload from dummy data
-    runtimeDrones = processDrones(dummyData.drones as RawDrone[]);
-    runtimeMissions = processMissions(dummyData.missions as RawMission[]);
-    
+    // Reset to empty arrays
+    runtimeDrones = [];
+    runtimeMissions = [];
   },
 
   // Export current data as JSON

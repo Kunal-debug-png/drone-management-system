@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Drone } from '@/types';
-import { Battery, MapPin, Thermometer, Signal, Settings, Plus, AlertTriangle, Wrench } from 'lucide-react';
+import { Battery, Thermometer, Signal, Settings, Plus, AlertTriangle, Wrench } from 'lucide-react';
 import { format } from 'date-fns';
+import { droneService } from '@/services/mockFirebase';
 
 export default function FleetManager() {
   const [drones, setDrones] = useState<Drone[]>([]);
@@ -18,11 +19,10 @@ export default function FleetManager() {
     sensors: ['RGB Camera']
   });
 
-  const fetchDrones = async () => {
+const fetchDrones = async () => {
     try {
-      const response = await fetch('/api/data');
-      const data = await response.json();
-      setDrones(data.drones);
+      const drones = await droneService.getAllDrones();
+      setDrones(drones);
       setLoading(false);
     } catch (error) {
       console.error('Failed to fetch drones:', error);
@@ -54,7 +54,7 @@ export default function FleetManager() {
     return 'text-red-600';
   };
 
-  const toggleMaintenanceStatus = async (droneId: string, currentStatus: string) => {
+const toggleMaintenanceStatus = async (droneId: string, currentStatus: string) => {
     try {
       // Only allow toggling between 'available' and 'maintenance'
       // Don't allow toggling if drone is in mission or idle
@@ -65,30 +65,11 @@ export default function FleetManager() {
 
       const newStatus = currentStatus === 'available' ? 'maintenance' : 'available';
       
-      // Fetch current data
-      const response = await fetch('/api/data');
-      const currentData = await response.json();
-      
-      // Update the specific drone's status
-      const updatedDrones = currentData.drones.map((drone: Drone) => 
-        drone.id === droneId 
-          ? { 
-              ...drone, 
-              status: newStatus as Drone['status'],
-              // Update lastMaintenance date if switching to maintenance
-              lastMaintenance: newStatus === 'maintenance' ? new Date() : drone.lastMaintenance
-            }
-          : drone
-      );
-      
-      // Save back to JSON
-      await fetch('/api/data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...currentData,
-          drones: updatedDrones
-        })
+      // Update the drone status using the service
+      await droneService.updateDrone(droneId, {
+        status: newStatus as Drone['status'],
+        // Update lastMaintenance date if switching to maintenance
+        lastMaintenance: newStatus === 'maintenance' ? new Date() : undefined
       });
       
       // Refresh the drones list
@@ -100,7 +81,7 @@ export default function FleetManager() {
     }
   };
 
-  const addDrone = async () => {
+const addDrone = async () => {
     try {
       const newDroneData: Omit<Drone, 'id'> = {
         ...newDrone,
@@ -118,26 +99,8 @@ export default function FleetManager() {
         }
       };
       
-      // Fetch current data
-      const response = await fetch('/api/data');
-      const currentData = await response.json();
-      
-      // Add new drone with generated ID
-      const newId = `drone${Date.now()}`;
-      const droneWithId = { ...newDroneData, id: newId };
-      
-      // Update the data
-      const updatedData = {
-        ...currentData,
-        drones: [...currentData.drones, droneWithId]
-      };
-      
-      // Save back to JSON
-      await fetch('/api/data', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updatedData)
-      });
+      // Create new drone using the service
+      await droneService.createDrone(newDroneData);
       
       // Refresh the drones list
       await fetchDrones();

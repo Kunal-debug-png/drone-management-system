@@ -4,19 +4,21 @@ import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Drone, Mission } from '@/types';
+import { droneService, missionService } from '@/services/mockFirebase';
 
 export default function Dashboard() {
   const [drones, setDrones] = useState<Drone[]>([]);
   const [missions, setMissions] = useState<Mission[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch('/api/data');
-        const data = await response.json();
-        setDrones(data.drones);
-        setMissions(data.missions);
+        const drones = await droneService.getAllDrones();
+        const missions = await missionService.getAllMissions();
+
+        setDrones(drones);
+        setMissions(missions);
       } catch (error) {
         console.error('Failed to fetch data:', error);
       } finally {
