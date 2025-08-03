@@ -22,16 +22,16 @@ export default function MissionPlanner() {
   const [selectedDrone, setSelectedDrone] = useState<string>('');
   const [missionName, setMissionName] = useState('');
   const [flightPattern, setFlightPattern] = useState<'crosshatch' | 'perimeter' | 'custom'>('crosshatch');
-  const [altitude, setAltitude] = useState(100);
-  const [speed, setSpeed] = useState(10);
-  const [overlapPercentage, setOverlapPercentage] = useState(20);
-  const [dataCollectionFrequency, setDataCollectionFrequency] = useState(1);
-  const [selectedSensors, setSelectedSensors] = useState<string[]>(['RGB Camera']);
+  const altitude = 100;
+  const speed = 10;
+  const overlapPercentage = 20;
+  const dataCollectionFrequency = 1;
+  const [selectedSensors, setSelectedSensors] = useState<string[]>(['RGB Camera', 'Infrared']);
   const [surveyArea, setSurveyArea] = useState<{ lat: number; lng: number }[]>([]);
   const [waypoints, setWaypoints] = useState<Waypoint[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const availableSensors = ['RGB Camera', 'Thermal Camera', 'LiDAR', 'Multispectral', 'Infrared'];
+  const availableSensors = ['RGB Camera', 'Infrared'];
 
   useEffect(() => {
     loadDrones();
@@ -295,64 +295,6 @@ export default function MissionPlanner() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Altitude (m)
-                </label>
-                <input
-                  type="number"
-                  value={altitude}
-                  onChange={(e) => setAltitude(Number(e.target.value))}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  min="10"
-                  max="400"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Speed (m/s)
-                </label>
-                <input
-                  type="number"
-                  value={speed}
-                  onChange={(e) => setSpeed(Number(e.target.value))}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  min="1"
-                  max="25"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Overlap (%)
-                </label>
-                <input
-                  type="number"
-                  value={overlapPercentage}
-                  onChange={(e) => setOverlapPercentage(Number(e.target.value))}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  min="0"
-                  max="80"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Data Frequency (Hz)
-                </label>
-                <input
-                  type="number"
-                  value={dataCollectionFrequency}
-                  onChange={(e) => setDataCollectionFrequency(Number(e.target.value))}
-                  className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  min="0.1"
-                  max="10"
-                  step="0.1"
-                />
-              </div>
-            </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
