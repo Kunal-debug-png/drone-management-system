@@ -1,5 +1,7 @@
 # Drone Survey System
 
+deployed: https://drone-management-system.vercel.app/
+
 A comprehensive web application for managing drone survey missions, built with Next.js 15, React, and TypeScript.
 
 ## 🚁 Features
